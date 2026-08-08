@@ -160,6 +160,28 @@ def eliminar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
         print("Estudiante eliminado correctamente.")
     else:
         print("La eliminación fue cancelada.")
+def mostrar_estadisticas(estudiantes: list[dict[str, Any]]) -> None:
+    """Muestra un resumen de los estudiantes registrados."""
+    if not estudiantes:
+        print("No existen estudiantes registrados.")
+        return
+
+    carreras = {}
+
+    for estudiante in estudiantes:
+        carrera = estudiante["carrera"]
+
+        if carrera in carreras:
+            carreras[carrera] += 1
+        else:
+            carreras[carrera] = 1
+
+    print("\nRESUMEN DE ESTUDIANTES")
+    print(f"Total de estudiantes: {len(estudiantes)}")
+    print("Estudiantes por carrera:")
+
+    for carrera, cantidad in carreras.items():
+        print(f"- {carrera}: {cantidad}")
 
 def mostrar_menu() -> None:
     """Muestra las opciones principales del programa."""
@@ -168,7 +190,8 @@ print("2. Listar estudiantes")
 print("3. Buscar estudiante")
 print("4. Editar estudiante")
 print("5. Eliminar estudiante")
-print("6. Salir")
+print("6. Ver estadisticas")
+print("7. Salir")
 
 def main() -> None:
     """Ejecuta el menú principal hasta que el usuario decida salir."""
@@ -183,14 +206,16 @@ def main() -> None:
         elif opcion == "2":
             listar_estudiantes(estudiantes)
         elif opcion == "3":
-            buscar_estudiante(estudiantes)
+         buscar_estudiante(estudiantes)
         elif opcion == "4":
          editar_estudiante(estudiantes)
         elif opcion == "5":
          eliminar_estudiante(estudiantes)
         elif opcion == "6":
+         mostrar_estadisticas(estudiantes)
+        elif opcion == "7":
          print("Programa finalizado.")
-        break
+         break
 
 
 if __name__ == "__main__":
