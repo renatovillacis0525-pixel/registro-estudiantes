@@ -52,7 +52,15 @@ def pedir_matricula(mensaje: str) -> str:
             return matricula
 
         print("Matrícula no válida. Ingrese únicamente números.")
+def encontrar_estudiante_por_matricula(
+    estudiantes: list[dict[str, Any]], matricula: str
+) -> dict[str, Any] | None:
+    """Busca un estudiante por su matrícula."""
+    for estudiante in estudiantes:
+        if estudiante["matricula"] == matricula:
+            return estudiante
 
+    return None
 def registrar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
     """Registra un estudiante si la matrícula todavía no existe."""
     matricula = pedir_matricula("Matrícula: ")
@@ -89,19 +97,26 @@ def listar_estudiantes(estudiantes: list[dict[str, Any]]) -> None:
         print("-" * 70)
 
 
-def buscar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
-    """Busca estudiantes por matrícula o por una parte del nombre."""
-    criterio = pedir_texto("Ingrese una matrícula o nombre: ").lower()
-    resultados = [
-        estudiante
-        for estudiante in estudiantes
-        if criterio in estudiante["matricula"].lower()
-        or criterio in estudiante["nombre"].lower()
-    ]
+def editar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
+    """Permite modificar la información de un estudiante registrado."""
+    matricula = pedir_texto("Ingrese la matrícula del estudiante a editar: ")
 
-    if not resultados:
-        print("No se encontraron coincidencias.")
+    estudiante = encontrar_estudiante_por_matricula(estudiantes, matricula)
+
+    if estudiante is None:
+        print("No se encontró un estudiante con esa matrícula.")
         return
+
+    print("\nEstudiante encontrado.")
+    print("Ingrese los nuevos datos:")
+
+    estudiante["matricula"] = pedir_matricula("Nueva matrícula: ")
+    estudiante["nombre"] = pedir_texto("Nuevo nombre completo: ")
+    estudiante["carrera"] = pedir_texto("Nueva carrera: ")
+    estudiante["correo"] = pedir_texto("Nuevo correo electrónico: ")
+
+    guardar_estudiantes(estudiantes)
+    print("Información actualizada correctamente.")
 
     listar_estudiantes(resultados)
 def editar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
@@ -127,22 +142,25 @@ def eliminar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
     """Elimina un estudiante utilizando su matrícula."""
     matricula = pedir_texto("Ingrese la matrícula del estudiante a eliminar: ")
 
-    for estudiante in estudiantes:
-        if estudiante["matricula"].lower() == matricula.lower():
-            print(f"Estudiante encontrado: {estudiante['nombre']}")
+    estudiante = encontrar_estudiante_por_matricula(estudiantes, matricula)
 
-            confirmacion = input("¿Desea eliminar este estudiante? (s/n): ").strip().lower()
+    if estudiante is None:
+        print("No se encontró un estudiante con esa matrícula.")
+        return
 
-            if confirmacion == "s":
-                estudiantes.remove(estudiante)
-                guardar_estudiantes(estudiantes)
-                print("Estudiante eliminado correctamente.")
-            else:
-                print("La eliminación fue cancelada.")
+    print(f"Estudiante encontrado: {estudiante['nombre']}")
 
-            return
+    confirmacion = input(
+        "¿Desea eliminar este estudiante? (s/n): "
+    ).strip().lower()
 
-    print("No se encontró un estudiante con esa matrícula.")
+    if confirmacion == "s":
+        estudiantes.remove(estudiante)
+        guardar_estudiantes(estudiantes)
+        print("Estudiante eliminado correctamente.")
+    else:
+        print("La eliminación fue cancelada.")
+
 def mostrar_menu() -> None:
     """Muestra las opciones principales del programa."""
     print("1. Registrar estudiante")
