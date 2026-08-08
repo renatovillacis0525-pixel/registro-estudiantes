@@ -115,15 +115,34 @@ def editar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
             return
 
     print("No se encontró un estudiante con esa matrícula.")
+def eliminar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
+    """Elimina un estudiante utilizando su matrícula."""
+    matricula = pedir_texto("Ingrese la matrícula del estudiante a eliminar: ")
 
+    for estudiante in estudiantes:
+        if estudiante["matricula"].lower() == matricula.lower():
+            print(f"Estudiante encontrado: {estudiante['nombre']}")
+
+            confirmacion = input("¿Desea eliminar este estudiante? (s/n): ").strip().lower()
+
+            if confirmacion == "s":
+                estudiantes.remove(estudiante)
+                guardar_estudiantes(estudiantes)
+                print("Estudiante eliminado correctamente.")
+            else:
+                print("La eliminación fue cancelada.")
+
+            return
+
+    print("No se encontró un estudiante con esa matrícula.")
 def mostrar_menu() -> None:
     """Muestra las opciones principales del programa."""
-    print("\nREGISTRO DE ESTUDIANTES")
     print("1. Registrar estudiante")
-    print("2. Listar estudiantes")
-    print("3. Buscar estudiante")
-    print("4. Editar estudiante")
-    print("5. Salir")
+print("2. Listar estudiantes")
+print("3. Buscar estudiante")
+print("4. Editar estudiante")
+print("5. Eliminar estudiante")
+print("6. Salir")
 
 def main() -> None:
     """Ejecuta el menú principal hasta que el usuario decida salir."""
@@ -140,12 +159,12 @@ def main() -> None:
         elif opcion == "3":
             buscar_estudiante(estudiantes)
         elif opcion == "4":
-            editar_estudiante(estudiantes)
+         editar_estudiante(estudiantes)
         elif opcion == "5":
-            print("Programa finalizado.")
-            break
-        else:
-            print("Opción no válida. Intente nuevamente.")
+         eliminar_estudiante(estudiantes)
+        elif opcion == "6":
+         print("Programa finalizado.")
+        break
 
 
 if __name__ == "__main__":
