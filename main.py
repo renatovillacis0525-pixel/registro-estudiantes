@@ -43,11 +43,19 @@ def pedir_texto(mensaje: str) -> str:
         if valor:
             return valor
         print("El dato no puede quedar vacío.")
+def pedir_matricula(mensaje: str) -> str:
+    """Solicita una matrícula válida formada únicamente por números."""
+    while True:
+        matricula = input(mensaje).strip()
 
+        if matricula.isdigit():
+            return matricula
+
+        print("Matrícula no válida. Ingrese únicamente números.")
 
 def registrar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
     """Registra un estudiante si la matrícula todavía no existe."""
-    matricula = pedir_texto("Matrícula: ")
+    matricula = pedir_matricula("Matrícula: ")
 
     if any(estudiante["matricula"].lower() == matricula.lower() for estudiante in estudiantes):
         print("Ya existe un estudiante con esa matrícula.")
@@ -105,7 +113,7 @@ def editar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
             print("\nEstudiante encontrado.")
             print("Ingrese los nuevos datos:")
 
-            estudiante["matricula"] = pedir_texto("Nueva matrícula: ")
+            estudiante["matricula"] = pedir_matricula("Nueva matrícula: ")
             estudiante["nombre"] = pedir_texto("Nuevo nombre completo: ")
             estudiante["carrera"] = pedir_texto("Nueva carrera: ")
             estudiante["correo"] = pedir_texto("Nuevo correo electrónico: ")
