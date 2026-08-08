@@ -96,7 +96,25 @@ def buscar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
         return
 
     listar_estudiantes(resultados)
+def editar_estudiante(estudiantes: list[dict[str, Any]]) -> None:
+    """Permite modificar la información de un estudiante registrado."""
+    matricula = pedir_texto("Ingrese la matrícula del estudiante a editar: ")
 
+    for estudiante in estudiantes:
+        if estudiante["matricula"].lower() == matricula.lower():
+            print("\nEstudiante encontrado.")
+            print("Ingrese los nuevos datos:")
+
+            estudiante["matricula"] = pedir_texto("Nueva matrícula: ")
+            estudiante["nombre"] = pedir_texto("Nuevo nombre completo: ")
+            estudiante["carrera"] = pedir_texto("Nueva carrera: ")
+            estudiante["correo"] = pedir_texto("Nuevo correo electrónico: ")
+
+            guardar_estudiantes(estudiantes)
+            print("Información actualizada correctamente.")
+            return
+
+    print("No se encontró un estudiante con esa matrícula.")
 
 def mostrar_menu() -> None:
     """Muestra las opciones principales del programa."""
@@ -104,8 +122,8 @@ def mostrar_menu() -> None:
     print("1. Registrar estudiante")
     print("2. Listar estudiantes")
     print("3. Buscar estudiante")
-    print("4. Salir")
-
+    print("4. Editar estudiante")
+    print("5. Salir")
 
 def main() -> None:
     """Ejecuta el menú principal hasta que el usuario decida salir."""
@@ -122,6 +140,8 @@ def main() -> None:
         elif opcion == "3":
             buscar_estudiante(estudiantes)
         elif opcion == "4":
+            editar_estudiante(estudiantes)
+        elif opcion == "5":
             print("Programa finalizado.")
             break
         else:
