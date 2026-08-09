@@ -1,53 +1,49 @@
 # Registro de estudiantes
 
-Proyecto básico desarrollado en Python para practicar la configuración inicial de Git y GitHub, la creación de un repositorio local, el registro del primer commit y la publicación en un repositorio remoto.
+## Descripción
 
-## Funciones disponibles
+Este proyecto consiste en una aplicación básica desarrollada en Python para registrar y consultar información de estudiantes.
 
-- Registrar un estudiante.
+El programa fue creado inicialmente para practicar el uso de Git y GitHub, pero durante las diferentes actividades se fueron agregando nuevas funcionalidades. Actualmente permite registrar estudiantes, buscarlos, modificar sus datos, eliminarlos y consultar un pequeño resumen de la información almacenada.
+
+Los datos se guardan localmente en un archivo JSON generado durante la ejecución del programa.
+
+## Objetivo
+
+Desarrollar una aplicación sencilla que permita administrar información básica de estudiantes y, al mismo tiempo, aplicar buenas prácticas de desarrollo como el control de versiones con Git, el uso de GitHub, la organización del código y la documentación del repositorio.
+
+## Funcionalidades
+
+El programa cuenta con las siguientes opciones:
+
+- Registrar nuevos estudiantes.
 - Evitar matrículas duplicadas.
-- Listar los estudiantes guardados.
-- Buscar por matrícula o nombre.
-- Guardar la información en un archivo JSON.
+- Validar que la matrícula contenga únicamente números.
+- Listar los estudiantes registrados.
+- Buscar estudiantes por matrícula o nombre.
+- Editar la información de un estudiante.
+- Eliminar estudiantes mediante su matrícula.
+- Confirmar antes de eliminar un registro.
+- Consultar el total de estudiantes registrados.
+- Mostrar la cantidad de estudiantes por carrera.
+- Guardar la información en formato JSON.
+
+## Tecnologías utilizadas
+
+- Python 3.
+- Visual Studio Code.
+- Git.
+- GitHub.
+- JSON para el almacenamiento local de los datos.
 
 ## Estructura del proyecto
 
 ```text
 registro-estudiantes/
+│
 ├── data/
-│   └── .gitkeep
+│   └── estudiantes.json
+│
 ├── .gitignore
 ├── main.py
 └── README.md
-```
-
-## Requisitos
-
-- Python 3.10 o una versión posterior.
-- Git instalado para controlar las versiones del proyecto.
-
-## Ejecución
-
-Desde la carpeta principal del proyecto, ejecutar:
-
-```bash
-python main.py
-```
-
-En algunos equipos con Windows también puede utilizarse:
-
-```bash
-py main.py
-```
-
-## Primer cambio registrado
-
-El primer commit del repositorio se realiza con el mensaje:
-
-```text
-Crea la estructura inicial del proyecto
-```
-
-## Autor
-
-Renato Villacis - estudiante de Ingeniería en Software.
