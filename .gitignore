@@ -1,7 +1,12 @@
 # Archivos temporales de Python
 __pycache__/
 *.py[cod]
+# Archivos temporales y registros
+*.log
+*.tmp
 
+# Variables de entorno y configuración privada
+.env
 # Entornos virtuales
 .venv/
 venv/
