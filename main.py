@@ -185,13 +185,17 @@ def mostrar_estadisticas(estudiantes: list[dict[str, Any]]) -> None:
 
 def mostrar_menu() -> None:
     """Muestra las opciones principales del programa."""
+    print("\n" + "=" * 40)
+    print("       REGISTRO DE ESTUDIANTES")
+    print("=" * 40)
     print("1. Registrar estudiante")
-print("2. Listar estudiantes")
-print("3. Buscar estudiante")
-print("4. Editar estudiante")
-print("5. Eliminar estudiante")
-print("6. Ver estadisticas")
-print("7. Salir")
+    print("2. Listar estudiantes")
+    print("3. Buscar estudiante")
+    print("4. Editar estudiante")
+    print("5. Eliminar estudiante")
+    print("6. Ver estadisticas")
+    print("7. Salir")
+    print("=" * 40)
 
 def main() -> None:
     """Ejecuta el menú principal hasta que el usuario decida salir."""
